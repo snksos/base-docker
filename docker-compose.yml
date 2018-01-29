@@ -1,0 +1,80 @@
+###############################################################################
+#              windows下开发PHP项目，基础环境 docker-compose                     #
+###############################################################################
+version: "3.1"
+services:
+  mysql:
+    image: mysql:latest
+    container_name: base_mysql
+    restart: unless-stopped
+    working_dir: /application
+    volumes:
+      - ./conf/base/timezone.conf:/etc/timezone:ro
+      - ./conf/base/PRC:/etc/localtime:ro
+      - ./conf/mysql/my.cnf:/etc/mysql/my.cnf:ro
+      - ./data/mysql/:/var/lib/mysql/:rw
+      - ./log/mysql/:/var/log/mysql/:rw
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+
+  mongo:
+    image: mongo:latest
+    container_name: base_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./conf/base/timezone.conf:/etc/timezone:ro
+      - ./conf/base/PRC:/etc/localtime:ro
+
+  memcached:
+    image: memcached:latest
+    container_name: base_memcached
+    ports:
+      - "11211:11211"
+    volumes:
+      - ./conf/base/timezone.conf:/etc/timezone:ro
+      - ./conf/base/PRC:/etc/localtime:ro
+
+  redis:
+    image: redis:latest
+    container_name: base_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./conf/base/timezone.conf:/etc/timezone:ro
+      - ./conf/base/PRC:/etc/localtime:ro
+
+  elasticsearch:
+    image: elasticsearch:latest
+    container_name: base_elasticsearch
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - ./conf/base/timezone.conf:/etc/timezone:ro
+      - ./conf/base/PRC:/etc/localtime:ro
+
+  rabbitmq:
+    image: rabbitmq:3.6.1-management
+    container_name: base_rabbitmq
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    volumes:
+      - ./conf/base/timezone.conf:/etc/timezone:ro
+      - ./conf/base/PRC:/etc/localtime:ro
+
+  emqtt:
+    image: devicexx/emqttd:latest
+    container_name: base_emqtt
+    ports:
+      - "18083:18083"
+      - "8083:8083"
+      - "8084:8084"
+      - "8443:8443"
+      - "1883:1883"
+    volumes:
+      - ./conf/base/timezone.conf:/etc/timezone:ro
+      - ./conf/base/PRC:/etc/localtime:ro
