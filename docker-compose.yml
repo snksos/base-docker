@@ -3,18 +3,6 @@
 ###############################################################################
 version: "3.1"
 services:
-  php7:
-    build: ./dockerfiles/php/php7/
-    container_name: base_php7
-    ports:
-      - "9000:9000"
-    volumes:
-      - ./conf/php/php.ini:/usr/local/etc/php/php.ini:ro
-      - ./conf/php/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf:rw
-      - ./log/php-fpm/:/var/log/php-fpm/:rw
-    links:
-      - mysql:mysql
-      - redis:redis
   mysql:
     image: mysql:latest
     container_name: base_mysql
