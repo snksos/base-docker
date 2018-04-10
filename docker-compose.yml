@@ -1,6 +1,3 @@
-###############################################################################
-#              windows下开发PHP项目，基础环境 docker-compose                     #
-###############################################################################
 version: "3.1"
 services:
   mysql:
@@ -42,16 +39,6 @@ services:
     container_name: base_redis
     ports:
       - "6379:6379"
-    volumes:
-      - ./conf/base/timezone.conf:/etc/timezone:ro
-      - ./conf/base/PRC:/etc/localtime:ro
-
-  elasticsearch:
-    image: elasticsearch:latest
-    container_name: base_elasticsearch
-    ports:
-      - "9200:9200"
-      - "9300:9300"
     volumes:
       - ./conf/base/timezone.conf:/etc/timezone:ro
       - ./conf/base/PRC:/etc/localtime:ro
