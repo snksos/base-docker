@@ -1,10 +1,11 @@
 version: "3.1"
 services:
   mysql:
-    image: mysql:latest
+    image: mysql:5
     container_name: base_mysql
     restart: unless-stopped
     working_dir: /application
+    command: mysqld --sql_mode=""
     volumes:
       - ./conf/base/timezone.conf:/etc/timezone:ro
       - ./conf/base/PRC:/etc/localtime:ro
