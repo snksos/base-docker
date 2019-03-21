@@ -3,7 +3,7 @@ services:
   mysql:
     image: mysql:5
     container_name: base_mysql
-    restart: unless-stopped
+    restart: always
     working_dir: /application
     command: mysqld --sql_mode=""
     volumes:
@@ -38,6 +38,7 @@ services:
   redis:
     image: redis:latest
     container_name: base_redis
+    restart: always
     ports:
       - "6379:6379"
     volumes:
